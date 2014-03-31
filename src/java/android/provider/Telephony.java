@@ -16,8 +16,6 @@
 
 package android.provider;
 
-import android.annotation.SdkConstant;
-import android.annotation.SdkConstant.SdkConstantType;
 import android.content.ComponentName;
 import android.content.ContentResolver;
 import android.content.ContentValues;
@@ -28,7 +26,7 @@ import android.database.sqlite.SqliteWrapper;
 import android.net.Uri;
 import android.telephony.SmsMessage;
 import android.text.TextUtils;
-import android.telephony.Rlog;
+import android.util.Log;
 import android.util.Patterns;
 
 import com.android.internal.telephony.SmsApplication;
@@ -645,7 +643,6 @@ public final class Telephony {
              * SMS application with the one specified in
              * {@link #EXTRA_PACKAGE_NAME}.
              */
-            @SdkConstant(SdkConstantType.ACTIVITY_INTENT_ACTION)
             public static final String ACTION_CHANGE_DEFAULT =
                     "android.provider.Telephony.ACTION_CHANGE_DEFAULT";
 
@@ -680,7 +677,6 @@ public final class Telephony {
              * the <a href="{@docRoot}guide/topics/manifest/receiver-element.html">{@code
              * &lt;receiver>}</a> tag.
              */
-            @SdkConstant(SdkConstantType.BROADCAST_INTENT_ACTION)
             public static final String SMS_DELIVER_ACTION =
                     "android.provider.Telephony.SMS_DELIVER";
 
@@ -702,7 +698,6 @@ public final class Telephony {
              * <p>If a BroadcastReceiver encounters an error while processing
              * this intent it should set the result code appropriately.</p>
              */
-            @SdkConstant(SdkConstantType.BROADCAST_INTENT_ACTION)
             public static final String SMS_RECEIVED_ACTION =
                     "android.provider.Telephony.SMS_RECEIVED";
 
@@ -723,7 +718,6 @@ public final class Telephony {
              * <p>If a BroadcastReceiver encounters an error while processing
              * this intent it should set the result code appropriately.</p>
              */
-            @SdkConstant(SdkConstantType.BROADCAST_INTENT_ACTION)
             public static final String DATA_SMS_RECEIVED_ACTION =
                     "android.intent.action.DATA_SMS_RECEIVED";
 
@@ -759,7 +753,6 @@ public final class Telephony {
              * the <a href="{@docRoot}guide/topics/manifest/receiver-element.html">{@code
              * &lt;receiver>}</a> tag.
              */
-            @SdkConstant(SdkConstantType.BROADCAST_INTENT_ACTION)
             public static final String WAP_PUSH_DELIVER_ACTION =
                     "android.provider.Telephony.WAP_PUSH_DELIVER";
 
@@ -790,7 +783,6 @@ public final class Telephony {
              * be 'unassigned/0x...', where '...' is the hex value of the unassigned parameter.  If
              * a parameter has No-Value the value in the map will be null.</p>
              */
-            @SdkConstant(SdkConstantType.BROADCAST_INTENT_ACTION)
             public static final String WAP_PUSH_RECEIVED_ACTION =
                     "android.provider.Telephony.WAP_PUSH_RECEIVED";
 
@@ -810,7 +802,6 @@ public final class Telephony {
              * <p>If a BroadcastReceiver encounters an error while processing
              * this intent it should set the result code appropriately.</p>
              */
-            @SdkConstant(SdkConstantType.BROADCAST_INTENT_ACTION)
             public static final String SMS_CB_RECEIVED_ACTION =
                     "android.provider.Telephony.SMS_CB_RECEIVED";
 
@@ -830,7 +821,6 @@ public final class Telephony {
              * <p>If a BroadcastReceiver encounters an error while processing
              * this intent it should set the result code appropriately.</p>
              */
-            @SdkConstant(SdkConstantType.BROADCAST_INTENT_ACTION)
             public static final String SMS_EMERGENCY_CB_RECEIVED_ACTION =
                     "android.provider.Telephony.SMS_EMERGENCY_CB_RECEIVED";
 
@@ -850,7 +840,6 @@ public final class Telephony {
              * <p>If a BroadcastReceiver encounters an error while processing
              * this intent it should set the result code appropriately.</p>
              */
-            @SdkConstant(SdkConstantType.BROADCAST_INTENT_ACTION)
             public static final String SMS_SERVICE_CATEGORY_PROGRAM_DATA_RECEIVED_ACTION =
                     "android.provider.Telephony.SMS_SERVICE_CATEGORY_PROGRAM_DATA_RECEIVED";
 
@@ -859,7 +848,6 @@ public final class Telephony {
              * space is not freed, messages targeted for the SIM (class 2) may
              * not be saved.
              */
-            @SdkConstant(SdkConstantType.BROADCAST_INTENT_ACTION)
             public static final String SIM_FULL_ACTION =
                     "android.provider.Telephony.SIM_FULL";
 
@@ -874,7 +862,6 @@ public final class Telephony {
              *   indicating the error returned to the network.</li>
              * </ul>
              */
-            @SdkConstant(SdkConstantType.BROADCAST_INTENT_ACTION)
             public static final String SMS_REJECTED_ACTION =
                 "android.provider.Telephony.SMS_REJECTED";
 
@@ -1616,14 +1603,14 @@ public final class Telephony {
                     if (cursor.moveToFirst()) {
                         return cursor.getLong(0);
                     } else {
-                        Rlog.e(TAG, "getOrCreateThreadId returned no rows!");
+                        Log.e(TAG, "getOrCreateThreadId returned no rows!");
                     }
                 } finally {
                     cursor.close();
                 }
             }
 
-            Rlog.e(TAG, "getOrCreateThreadId failed with uri " + uri.toString());
+            Log.e(TAG, "getOrCreateThreadId failed with uri " + uri.toString());
             throw new IllegalArgumentException("Unable to find or allocate a thread ID.");
         }
     }
@@ -2013,7 +2000,6 @@ public final class Telephony {
              * The application which is showing or caching these contents
              * should be updated.
              */
-            @SdkConstant(SdkConstantType.BROADCAST_INTENT_ACTION)
             public static final String CONTENT_CHANGED_ACTION
                     = "android.intent.action.CONTENT_CHANGED";
 
