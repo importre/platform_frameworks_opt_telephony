@@ -16,7 +16,11 @@
 
 package android.provider;
 
-import android.content.ComponentName;
+import java.util.HashSet;
+import java.util.Set;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 import android.content.ContentResolver;
 import android.content.ContentValues;
 import android.content.Context;
@@ -24,18 +28,11 @@ import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SqliteWrapper;
 import android.net.Uri;
+import android.provider.Telephony.Sms;
 import android.telephony.SmsMessage;
 import android.text.TextUtils;
 import android.util.Log;
 import android.util.Patterns;
-
-import com.android.internal.telephony.SmsApplication;
-
-
-import java.util.HashSet;
-import java.util.Set;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 /**
  * The Telephony provider contains data related to phone operation, specifically SMS and MMS
@@ -260,11 +257,7 @@ public final class Telephony {
          * @return package name for the default SMS package or null
          */
         public static String getDefaultSmsPackage(Context context) {
-            ComponentName component = SmsApplication.getDefaultSmsApplication(context, false);
-            if (component != null) {
-                return component.getPackageName();
-            }
-            return null;
+            return Telephony.Sms.getDefaultSmsPackage(context);
         }
 
         /**
@@ -881,7 +874,7 @@ public final class Telephony {
 
                 for (int i = 0; i < pduCount; i++) {
                     byte[] pdu = (byte[]) messages[i];
-                    msgs[i] = SmsMessage.createFromPdu(pdu, format);
+                    msgs[i] = SmsMessage.createFromPdu(pdu);
                 }
                 return msgs;
             }
